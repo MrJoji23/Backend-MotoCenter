@@ -56,7 +56,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         @Override
         public Usuariodto UsuarioByGmail(String correo){
-            return useRep.findByEmail(correo)
+            return useRep.findByCorreo(correo)
             .map(userMapper::toDto)
             .orElseThrow(()-> new RuntimeException(
                 "No se ha encontrado ningun usuario con este correo " + correo
@@ -80,7 +80,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         auth.setId(perfilUsuario.getId());
         auth.setUser(dto.getUsuario());
         auth.setPass(passwordEncoder.encode(dto.getPassword()));
-        auth.setRol(dto.getRoles());
+        auth.setRoles(dto.getRoles());
 
         uauthRep.save(auth);
 

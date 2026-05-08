@@ -19,6 +19,6 @@ public class UsuarioAuth {
     private String id;
     private String user;
     private String pass;
-    private List<Rol> rol;
+    private List<Rol> roles;
 
 }

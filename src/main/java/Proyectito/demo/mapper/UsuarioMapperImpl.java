@@ -2,9 +2,12 @@ package Proyectito.demo.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import Proyectito.demo.dto.Usuariodto;
 import Proyectito.demo.model.Usuario;
 
+@Component
 public class UsuarioMapperImpl implements UsuarioMapper {
 
     @Override
@@ -28,7 +31,7 @@ public class UsuarioMapperImpl implements UsuarioMapper {
         .id(usuario.getId())
         .nombre(usuario.getNombre())
         .apellido(usuario.getApellido())
-        .correo(usuario.getApellido())
+        .correo(usuario.getCorreo())
         .build();
         
     }

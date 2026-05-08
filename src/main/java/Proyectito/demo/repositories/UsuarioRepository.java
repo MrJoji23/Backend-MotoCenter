@@ -9,6 +9,6 @@ import Proyectito.demo.model.Usuario;
 public interface UsuarioRepository extends MongoRepository <Usuario, String> {
 
     //Metodo para buscar por el correo
-    Optional<Usuario> findByEmail(String email);
+    Optional<Usuario> findByCorreo(String correo);
 
 }
