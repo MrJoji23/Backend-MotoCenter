@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/api-v1/**", 
-                                "/auth/**"
+                                "/auth/login"
                             )
                         .permitAll()
                         .anyRequest().authenticated());
@@ -50,7 +50,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("*/**", config);// Aplica CORS a TODAS las rutas, para permitir el config
+        source.registerCorsConfiguration("/**", config);// Aplica CORS a TODAS las rutas, para permitir el config
 
         return source;
 

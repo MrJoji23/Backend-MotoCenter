@@ -44,4 +44,18 @@ public class UsuarioMapperImpl implements UsuarioMapper {
         .map(this::toDto)
         .toList();
     }
+
+    @Override
+    public void updateUsuario(Usuariodto dto, Usuario usuario){
+        if (usuario == null) {
+            throw new IllegalArgumentException("Falta el dato de la entidad usuario ");
+        }
+        if (dto == null) {
+            throw new IllegalArgumentException("Falta el dato del dto usuario");
+        }
+
+        usuario.setNombre(dto.getNombre());
+        usuario.setApellido(dto.getApellido());
+        usuario.setCorreo(dto.getCorreo());
+    }
 }

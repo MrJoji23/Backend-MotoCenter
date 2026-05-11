@@ -11,6 +11,8 @@ public interface UsuarioMapper {
     
     Usuariodto toDto(Usuario usuario); // Método para convertir de Usuario a UsuarioDto
 
-    List <Usuariodto> todosList(List<Usuario> usuarios);
+    List <Usuariodto> todosList(List<Usuario> usuarios);// Listar todos los usuarios creados
+
+    void updateUsuario(Usuariodto dto, Usuario usuario);//Actualizar un Usuario con los datos de dto
 
 }

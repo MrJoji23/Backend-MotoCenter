@@ -1,6 +1,7 @@
 package Proyectito.demo.services;
 
 import java.util.List;
+import java.util.Map;
 
 import Proyectito.demo.dto.UsuarioRegistradodto;
 import Proyectito.demo.dto.Usuariodto;
@@ -16,7 +17,9 @@ public interface UsuarioService  {
     Usuariodto UsuarioByGmail(String correo); // Buscar usuario por correo
 
     UsuarioRegistradodto crearUsuario(UsuarioRegistradodto dto);
-
+    
+    Usuariodto update(String id, Map<String, Object> campos);//Actualizar un dato o varios, sin que modifique los otros campos
+    
 
 
 }

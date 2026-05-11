@@ -3,10 +3,12 @@ package Proyectito.demo.security;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
 import Proyectito.demo.model.UsuarioAuth;
 import Proyectito.demo.repositories.UserAuthRepository;
 
+@Service
 public class DetallesUsuarioService implements UserDetailsService {
 
     private final UserAuthRepository uar;

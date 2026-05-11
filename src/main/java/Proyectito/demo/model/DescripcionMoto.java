@@ -12,5 +12,5 @@ public class DescripcionMoto {
     private String cilindraje;
     private String potencia;
     private String torque;
-    private String Peso;
+    private String peso;
 }

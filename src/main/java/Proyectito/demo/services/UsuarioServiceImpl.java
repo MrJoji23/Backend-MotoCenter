@@ -1,6 +1,7 @@
 package Proyectito.demo.services;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -86,6 +87,24 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return dto;
         
+        
     }
+    @Transactional
+        @Override
+        public Usuariodto update(String id, Map<String, Object> campos){
+         
+            Usuario usuario = useRep.findById(id)
+            .orElseThrow(()-> new RuntimeException("Usuario no encontrado con id " +  id ));
+            
+            campos.forEach((campo, valor) -> {
+                switch(campo){
+                    case "nombre" -> usuario.setNombre((String) valor);
+                    case "apellido" -> usuario.setApellido((String) valor);
+                    case "correo " -> usuario.setCorreo((String) valor);
+                }
+
+            });
+            return userMapper.toDto(useRep.save(usuario));
+        }
 
 }
