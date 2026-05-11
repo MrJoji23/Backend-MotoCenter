@@ -20,26 +20,41 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "DTO para registro de nuevo usuario")
 public class UsuarioRegistradodto {
     
-    @Schema(description = "Nombre(s) del usuario", example = "Juan Carlos", required = true)
+    @Schema(
+        description = "Nombre(s) del usuario",
+        example = "Juan Carlos",
+        requiredMode = Schema.RequiredMode.REQUIRED  // ← actualizado
+    )
     @NotBlank(message = "El nombre es obligatorio dese backend")
     private String nombre;
     
-    @Schema(description = "Apellido(s) del usuario", example = "Pérez González", required = true)
-    @NotBlank(message = "El apellido es obligatorio tambien dese backend    ")
+    @Schema(
+        description = "Apellido(s) del usuario",
+        example = "Pérez González",
+        requiredMode = Schema.RequiredMode.REQUIRED  // ← actualizado
+    )
+    @NotBlank(message = "El apellido es obligatorio tambien dese backend")
     private String apellido;
     
     @Schema(description = "Correo electrónico válido", example = "jperez@empresa.com", format = "email")
     private String correo;
     
-    @Schema(description = "Nombre de usuario único para login", example = "jperez2024", required = true)
+    @Schema(
+        description = "Nombre de usuario único para login",
+        example = "jperez2024",
+        requiredMode = Schema.RequiredMode.REQUIRED  // ← actualizado
+    )
     private String usuario;
 
-    @Schema(description = "Contraseña segura (mínimo 8 caracteres)", example = "MiClaveSegura123!", 
-            format = "password", writeOnly = true)
+    @Schema(
+        description = "Contraseña segura (mínimo 8 caracteres)",
+        example = "MiClaveSegura123!",
+        format = "password",
+        accessMode = Schema.AccessMode.WRITE_ONLY    // ← actualizado
+    )
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Schema(description = "Roles asignados al usuario", example = "[\"USER\",\"ADMIN\"]")
     private List<Rol> roles;
-
 }

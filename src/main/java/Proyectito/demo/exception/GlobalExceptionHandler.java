@@ -4,6 +4,7 @@ import java.nio.file.AccessDeniedException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -33,6 +34,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new RespuestaApi(500, "Error interno del servidor"));
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<RespuestaApi> handleBadCredentials(BadCredentialsException ex) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(new RespuestaApi(401, "Usuario o contraseña incorrectos"));
     }
 
 }
