@@ -51,9 +51,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         @Override
         public void delete(String id){
             if (!useRep.existsById(id)) {
-                throw new RecursoNoEncontrado(id);
+                throw new RecursoNoEncontrado("No se encontro un usuario con ese id " + id);
             }
-            useRep.deleteById("Usuario no encontrado con id: "+id);
+            useRep.deleteById(id);
+            uauthRep.deleteById(id);
         }
 
         @Override

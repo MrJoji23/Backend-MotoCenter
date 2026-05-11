@@ -3,6 +3,7 @@ package Proyectito.demo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import Proyectito.demo.dto.RespuestaApi;
 import Proyectito.demo.dto.UsuarioRegistradodto;
 import Proyectito.demo.dto.Usuariodto;
 import Proyectito.demo.services.UsuarioService;
@@ -74,9 +75,10 @@ public class UserController {
             )
         }
     )
-    public ResponseEntity<?> registrar(@Valid @RequestBody UsuarioRegistradodto dto) {
+    public ResponseEntity<RespuestaApi> registrar(@Valid @RequestBody UsuarioRegistradodto dto) {
         UsuarioRegistradodto creado = usuarioService.crearUsuario(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(creado);
+        return ResponseEntity.status(HttpStatus.CREATED)
+        .body(new RespuestaApi(201, "Usuario creado exitosamente", creado));
     }
 
     @GetMapping("/email/{correo}")
@@ -110,12 +112,13 @@ public class UserController {
             )
         }
     )
-    public ResponseEntity<?> userEmail(@PathVariable String correo) {
-        try{
+    public ResponseEntity<RespuestaApi> userEmail(@PathVariable String correo) {
+        try {
             Usuariodto usuario = usuarioService.UsuarioByGmail(correo);
-            return ResponseEntity.ok(usuario);
-        }catch(RuntimeException ex){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+            return ResponseEntity.ok(new RespuestaApi(200, "Usuario encontrado", usuario));
+        } catch(RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new RespuestaApi(404, ex.getMessage()));
         }
     }
     
@@ -147,10 +150,10 @@ public class UserController {
             )
         }
     )
-    public ResponseEntity<Void> eliminar(@PathVariable String id){
-        usuarioService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+    public ResponseEntity<RespuestaApi> eliminar(@PathVariable String id){
+    usuarioService.delete(id);
+    return ResponseEntity.ok(new RespuestaApi(200, "Usuario eliminado exitosamente"));
+}
     
     @GetMapping
     @Operation(
@@ -173,9 +176,10 @@ public class UserController {
             )
         }
     )
-    public ResponseEntity<List<Usuariodto>> todos() {
-        return ResponseEntity.ok(usuarioService.ListUsuarios());
-    }
+    public ResponseEntity<RespuestaApi> todos() {
+    List<Usuariodto> usuarios = usuarioService.ListUsuarios();
+    return ResponseEntity.ok(new RespuestaApi(200, "Usuarios obtenidos exitosamente", usuarios));
+}
 
     @PutMapping("/{id}")
     @Operation(
@@ -224,8 +228,9 @@ public class UserController {
             )
         }
     )
-    public ResponseEntity<Usuariodto> actualizar(@PathVariable String id, @RequestBody Map<String, Object> campos){
-        return ResponseEntity.ok(usuarioService.update(id, campos));
+    public ResponseEntity<RespuestaApi> actualizar(@PathVariable String id, @RequestBody Map<String, Object> campos) {
+        Usuariodto actualizado = usuarioService.update(id, campos);
+        return ResponseEntity.ok(new RespuestaApi(200, "Usuario actualizado exitosamente", actualizado));
     }
     
 }
