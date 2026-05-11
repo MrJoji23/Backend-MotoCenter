@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import Proyectito.demo.dto.UsuarioRegistradodto;
 import Proyectito.demo.dto.Usuariodto;
+import Proyectito.demo.exception.RecursoNoEncontrado;
 import Proyectito.demo.mapper.UsuarioMapper;
 import Proyectito.demo.model.Usuario;
 import Proyectito.demo.model.UsuarioAuth;
@@ -50,18 +51,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         @Override
         public void delete(String id){
             if (!useRep.existsById(id)) {
-                throw new RuntimeException("Usuario no encontrado con el id" + id);
+                throw new RecursoNoEncontrado(id);
             }
-            useRep.deleteById(id);
+            useRep.deleteById("Usuario no encontrado con id: "+id);
         }
 
         @Override
         public Usuariodto UsuarioByGmail(String correo){
             return useRep.findByCorreo(correo)
             .map(userMapper::toDto)
-            .orElseThrow(()-> new RuntimeException(
-                "No se ha encontrado ningun usuario con este correo " + correo
-            ));
+            .orElseThrow(()-> new RecursoNoEncontrado("No se encontro ningun usuario con el correo: "+correo));
         }
 
         @Transactional
@@ -94,7 +93,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         public Usuariodto update(String id, Map<String, Object> campos){
          
             Usuario usuario = useRep.findById(id)
-            .orElseThrow(()-> new RuntimeException("Usuario no encontrado con id " +  id ));
+            .orElseThrow(()-> new RecursoNoEncontrado("No se encontre un usuario con el id: " + id));
             
             campos.forEach((campo, valor) -> {
                 switch(campo){
