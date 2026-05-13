@@ -58,8 +58,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/api-v1/**").hasRole("ADMIN")
                 .requestMatchers(
-                        "/auth/login",
-                        "/api-v1/registrar",
+                        "/auth/**",
+                        "/api-v1/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
                         "/v3/api-docs/**",
