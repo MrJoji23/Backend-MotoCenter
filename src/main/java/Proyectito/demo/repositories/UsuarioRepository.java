@@ -11,4 +11,6 @@ public interface UsuarioRepository extends MongoRepository <Usuario, String> {
     //Metodo para buscar por el correo
     Optional<Usuario> findByCorreo(String correo);
 
+    boolean existsByCorreo(String correo);
+
 }

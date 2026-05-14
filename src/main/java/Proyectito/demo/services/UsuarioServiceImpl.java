@@ -67,6 +67,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         @Transactional
         @Override
         public UsuarioRegistradodto crearUsuario(UsuarioRegistradodto dto) {
+        if(useRep.existsByCorreo(dto.getCorreo())){
+            throw new RuntimeException("El correo ya esta registrado");
+        }
+
+        if(uauthRep.existsByUser(dto.getUsuario())){
+            throw new RuntimeException("El usuario ya existe, usa otro");
+        }
             Usuario perfil = Usuario.builder()
                 .id(UUID.randomUUID().toString())
                 .nombre(dto.getNombre())
