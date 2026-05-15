@@ -9,6 +9,8 @@ import Proyectito.demo.model.UsuarioAuth;
 public interface UserAuthRepository extends MongoRepository<UsuarioAuth, String> {
 
     Optional<UsuarioAuth> findByUser(String user);
+
+    boolean existsByUser(String user);
     
 }
     
