@@ -9,9 +9,11 @@ import Proyectito.demo.dto.Usuariodto;
 import Proyectito.demo.services.UsuarioService;
 import jakarta.validation.Valid;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,7 +79,7 @@ public class UserController {
     public ResponseEntity<RespuestaApi> registrar(@Valid @RequestBody UsuarioRegistradodto dto) {
         UsuarioRegistradodto creado = usuarioService.crearUsuario(dto);
         return ResponseEntity.status(HttpStatus.CREATED)
-        .body(new RespuestaApi(201, "Usuario creado exitosamente", creado));
+        .body(new RespuestaApi(201, "Usuario creado exitosamente", creado, LocalDateTime.now()));
     }
 
     @GetMapping("/email/{correo}")
@@ -114,10 +116,10 @@ public class UserController {
     public ResponseEntity<RespuestaApi> userEmail(@PathVariable String correo) {
         try {
             Usuariodto usuario = usuarioService.UsuarioByGmail(correo);
-            return ResponseEntity.ok(new RespuestaApi(200, "Usuario encontrado", usuario));
+            return ResponseEntity.ok(new RespuestaApi(200, "Usuario encontrado", usuario, LocalDateTime.now()));
         } catch(RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new RespuestaApi(404, ex.getMessage()));
+                .body(new RespuestaApi(404, ex.getMessage(), null, LocalDateTime.now()));
         }
     }
     
@@ -151,7 +153,7 @@ public class UserController {
     )
     public ResponseEntity<RespuestaApi> eliminar(@PathVariable String id){
     usuarioService.delete(id);
-    return ResponseEntity.ok(new RespuestaApi(200, "Usuario eliminado exitosamente"));
+    return ResponseEntity.ok(new RespuestaApi(200, "Usuario eliminado exitosamente", null, LocalDateTime.now()));
 }
     
     @GetMapping
@@ -177,7 +179,7 @@ public class UserController {
     )
     public ResponseEntity<RespuestaApi> todos() {
     List<Usuariodto> usuarios = usuarioService.ListUsuarios();
-    return ResponseEntity.ok(new RespuestaApi(200, "Usuarios obtenidos exitosamente", usuarios));
+    return ResponseEntity.ok(new RespuestaApi(200, "Usuarios obtenidos exitosamente", usuarios, LocalDateTime.now()));
 }
 
     @PutMapping("/{id}")
@@ -229,7 +231,7 @@ public class UserController {
     )
     public ResponseEntity<RespuestaApi> actualizar(@PathVariable String id, @RequestBody Map<String, Object> campos) {
         Usuariodto actualizado = usuarioService.update(id, campos);
-        return ResponseEntity.ok(new RespuestaApi(200, "Usuario actualizado exitosamente", actualizado));
+        return ResponseEntity.ok(new RespuestaApi(200, "Usuario actualizado exitosamente", actualizado, LocalDateTime.now()));
     }
     
 }
