@@ -56,5 +56,5 @@ public class UsuarioRegistradodto {
     private String password;
 
     @Schema(description = "Roles asignados al usuario", example = "[\"USER\",\"ADMIN\"]")
-    private List<Rol> roles;
+    private Rol rol;
 }

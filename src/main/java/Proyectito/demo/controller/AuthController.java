@@ -129,10 +129,8 @@ public class AuthController {
         Usuario perfil = urepo.findById(usuario.getId())
                                 .orElseThrow(() -> new RuntimeException("Perfil no encontrado"));
 
-            List<String> roles = usuario.getRoles()
-                .stream()
-                .map(Enum::name)
-                .toList();
+            String nombreRol = usuario.getRol().name(); 
+            List<String> roles = List.of(nombreRol);
 
                 String token = jwtService.generartoken(usuario.getUser(), roles,  perfil.getNombre(), perfil.getApellido());
 

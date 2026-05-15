@@ -89,7 +89,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         auth.setId(perfilUsuario.getId());
         auth.setUser(dto.getUsuario());
         auth.setPass(passwordEncoder.encode(dto.getPassword()));
-        auth.setRoles(dto.getRoles());
+        auth.setRol(dto.getRol());
 
         uauthRep.save(auth);
 

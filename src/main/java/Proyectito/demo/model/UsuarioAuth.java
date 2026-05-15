@@ -1,8 +1,6 @@
 package Proyectito.demo.model;
 
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,6 +17,6 @@ public class UsuarioAuth {
     private String id;
     private String user;
     private String pass;
-    private List<Rol> roles;
+    private Rol rol;
 
 }

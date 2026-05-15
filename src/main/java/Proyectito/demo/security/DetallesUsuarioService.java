@@ -26,12 +26,9 @@ public class DetallesUsuarioService implements UserDetailsService {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado sp"));
 
         return User.builder()
-                .username(usuario.getUser()) // Establece el nombre de usuario
+                .username(usuario.getUser()) // Establece el nombre de  usuario
                 .password(usuario.getPass()) // Establece la contraseña (debería estar codificada)
-                .authorities(
-                        usuario.getRoles().stream()
-                                .map(Enum::name)
-                                .toArray(String[]::new))
+                .roles(usuario.getRol().name())
                 // Puedes asignar roles según
                 // tu lógica
                 .build();
