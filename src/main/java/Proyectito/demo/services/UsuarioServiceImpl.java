@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import Proyectito.demo.dto.UsuarioRegistradodto;
 import Proyectito.demo.dto.Usuariodto;
 import Proyectito.demo.exception.RecursoNoEncontrado;
+import Proyectito.demo.exception.UserException;
 import Proyectito.demo.mapper.UsuarioMapper;
 import Proyectito.demo.model.Usuario;
 import Proyectito.demo.model.UsuarioAuth;
@@ -68,11 +69,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         @Override
         public UsuarioRegistradodto crearUsuario(UsuarioRegistradodto dto) {
         if(useRep.existsByCorreo(dto.getCorreo())){
-            throw new RuntimeException("El correo ya esta registrado");
+            throw new UserException("El correo ya esta registrado");
         }
 
         if(uauthRep.existsByUser(dto.getUsuario())){
-            throw new RuntimeException("El usuario ya existe, usa otro");
+            throw new UserException("El usuario ya existe, usa otro");
         }
             Usuario perfil = Usuario.builder()
                 .id(UUID.randomUUID().toString())
