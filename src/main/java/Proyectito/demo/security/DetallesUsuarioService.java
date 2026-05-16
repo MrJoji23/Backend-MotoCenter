@@ -28,9 +28,7 @@ public class DetallesUsuarioService implements UserDetailsService {
         return User.builder()
                 .username(usuario.getUser()) // Establece el nombre de  usuario
                 .password(usuario.getPass()) // Establece la contraseña (debería estar codificada)
-                .roles(usuario.getRol().name())
-                // Puedes asignar roles según
-                // tu lógica
+                .authorities(usuario.getRol().name())
                 .build();
     }
 

@@ -26,10 +26,10 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    public String generartoken(String usuario, List<String> roles, String nombre, String apellido){
+    public String generartoken(String usuario, String rol, String nombre, String apellido){
         return Jwts.builder()
             .setSubject(usuario)
-            .claim("roles", roles)
+            .claim("roles", rol)
             .claim("nombre", nombre)
             .claim("apellido", apellido)
             .setIssuedAt(new Date())

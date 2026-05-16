@@ -35,5 +35,5 @@ public class UsuarioAuthdto {
     private String password;
 
     @Schema(description = "Roles del usuario (solo para registro)", hidden = true)
-    private List<Rol> roles;
+    private Rol rol;
 }

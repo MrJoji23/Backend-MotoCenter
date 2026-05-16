@@ -130,9 +130,8 @@ public class AuthController {
                                 .orElseThrow(() -> new RuntimeException("Perfil no encontrado"));
 
             String nombreRol = usuario.getRol().name(); 
-            List<String> roles = List.of(nombreRol);
 
-                String token = jwtService.generartoken(usuario.getUser(), roles,  perfil.getNombre(), perfil.getApellido());
+                String token = jwtService.generartoken(usuario.getUser(), nombreRol,  perfil.getNombre(), perfil.getApellido());
 
                 Map<String, Object> respuesta = Map.of(
                     "timestamp", LocalDateTime.now(),
@@ -141,7 +140,7 @@ public class AuthController {
                     "mensaje", "Login extioso",
                     "usuario", usuario.getUser(),
                     "nombreCompleto", perfil.getNombre() + " " + perfil.getApellido(),
-                    "roles", roles,
+                    "rol", nombreRol,
                     "token", token);
                     return ResponseEntity.ok(respuesta);
                     
