@@ -93,10 +93,10 @@ public class AuthController {
                                   "timestamp": "2026-05-10T22:30:00",
                                   "status": 200,
                                   "id": "123e4567-e89b-12d3-a456-426614174000",
-                                  "mensaje": "Login extioso",
+                                  "mensaje": "Login exitoso",
                                   "usuario": "jperez",
                                   "nombreCompleto": "Juan Perez",
-                                  "roles": ["USER", "ADMIN"],
+                                  "rol": "USER",
                                   "token": "eyJhbGciOiJIUzI1NiJ9..."
                                 }
                               """
