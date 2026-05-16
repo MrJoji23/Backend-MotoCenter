@@ -108,7 +108,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 switch(campo){
                     case "nombre" -> usuario.setNombre((String) valor);
                     case "apellido" -> usuario.setApellido((String) valor);
-                    case "correo " -> usuario.setCorreo((String) valor);
+                    case "correo" -> usuario.setCorreo((String) valor);
                 }
 
             });
